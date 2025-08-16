@@ -23,7 +23,7 @@ public class ReasonsStoppingCars : MonoBehaviour
         }
         else if (distance < distanceToCar)
         {
-            if (car.GetComponent<Rigidbody>().velocity.magnitude < rigbody.velocity.magnitude)
+            if (car.GetComponent<Rigidbody>().linearVelocity.magnitude < rigbody.linearVelocity.magnitude)
             {
                 tempStop = true;
             }
@@ -146,7 +146,7 @@ public class ReasonsStoppingCars : MonoBehaviour
         }
         else if (distance < 9.0f)
         {
-            if (controller.GetComponent<Rigidbody>().velocity.magnitude < rigbody.velocity.magnitude)
+            if (controller.GetComponent<Rigidbody>().linearVelocity.magnitude < rigbody.linearVelocity.magnitude)
             {
                 Debug.Log("1");
                 tempStop = true;

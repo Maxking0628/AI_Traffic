@@ -214,12 +214,12 @@ public class CarAIController : MonoBehaviour
 
                 if (!isACar)
                 {
-                    velocity.y = rigbody.velocity.y;
-                    rigbody.velocity = new Vector3(velocity.normalized.x * curMoveSpeed, velocity.y, velocity.normalized.z * curMoveSpeed);
+                    velocity.y = rigbody.linearVelocity.y;
+                    rigbody.linearVelocity = new Vector3(velocity.normalized.x * curMoveSpeed, velocity.y, velocity.normalized.z * curMoveSpeed);
                 }
                 else
                 {
-                    velocity.y = rigbody.velocity.y;
+                    velocity.y = rigbody.linearVelocity.y;
                 }
             }
         }
@@ -319,9 +319,9 @@ public class CarAIController : MonoBehaviour
             }
         }
 
-        if (rigbody.velocity.magnitude > curMoveSpeed)
+        if (rigbody.linearVelocity.magnitude > curMoveSpeed)
         {
-            rigbody.velocity = rigbody.velocity.normalized * curMoveSpeed;
+            rigbody.linearVelocity = rigbody.linearVelocity.normalized * curMoveSpeed;
         }
     }
 

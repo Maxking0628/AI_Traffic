@@ -7,8 +7,8 @@ public class SemaphoreSimulator : MonoBehaviour
     private float redTimer;
     private float peopleTimer;
 	private int stage;
-    private bool yellowOn;	
-	private bool timeBreak;
+    private bool yellowOn;
+    private bool timeBreak;
     private bool timePeople;
 
     [SerializeField] [Tooltip("Selecting the direction of the initial motion at the traffic light / Выбор направления начального движения на светофоре")] private bool blockForward;
@@ -88,7 +88,7 @@ public class SemaphoreSimulator : MonoBehaviour
 
 	private void Update()
 	{
-       if (yellowOn)
+        if (yellowOn)
         {
             yellowTimer -= Time.deltaTime;
 
@@ -99,9 +99,9 @@ public class SemaphoreSimulator : MonoBehaviour
 
                 if (timeBreak)
                 {
-                    if(stage == 0)
+                    if (stage == 0)
                     {
-					    stage++;
+                        stage++;
                     }
                     else
                     {
@@ -115,54 +115,54 @@ public class SemaphoreSimulator : MonoBehaviour
                 }
                 else
                 {
-					if (blockForward)
-					{
-						for (int i = 0; i < LRlights.Length; i++)
-						{
-							LRlights[i].DisableYellow();
-							LRlights[i].EnableRed();
-						}
-					}
-					else
-					{
-						for (int i = 0; i < FWDlights.Length; i++)
-						{
-							FWDlights[i].DisableYellow();
-							FWDlights[i].EnableRed();
-						}
-					}
+                    if (blockForward)
+                    {
+                        for (int i = 0; i < LRlights.Length; i++)
+                        {
+                            LRlights[i].DisableYellow();
+                            LRlights[i].EnableRed();
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < FWDlights.Length; i++)
+                        {
+                            FWDlights[i].DisableYellow();
+                            FWDlights[i].EnableRed();
+                        }
+                    }
 
-					if(stage == 0)
-					{
-						timeBreak = true;
-					}
-					else if(stage == 1)
-					{
-                        for(int i = 0; i < FWDpeopleLight.Length; i++)
+                    if (stage == 0)
+                    {
+                        timeBreak = true;
+                    }
+                    else if (stage == 1)
+                    {
+                        for (int i = 0; i < FWDpeopleLight.Length; i++)
                         {
                             FWDpeopleLight[i].DisableRed();
                             FWDpeopleLight[i].EnableGreen(false);
                         }
 
-                        for(int i = 0; i < LRpeopleLight.Length; i++)
+                        for (int i = 0; i < LRpeopleLight.Length; i++)
                         {
                             LRpeopleLight[i].DisableRed();
                             LRpeopleLight[i].EnableGreen(false);
                         }
 
-                        for(int i = 0; i < FWDpeopleZebra.Length; i++)
+                        for (int i = 0; i < FWDpeopleZebra.Length; i++)
                         {
                             FWDpeopleZebra[i].PEOPLE_CAN = true;
                         }
 
-                        for(int i = 0; i < LRpeopleZebra.Length; i++)
+                        for (int i = 0; i < LRpeopleZebra.Length; i++)
                         {
                             LRpeopleZebra[i].PEOPLE_CAN = true;
-                        }                                                
+                        }
 
                         peopleTimer = peopleTime;
                         timePeople = true;
-					}
+                    }
                 }
             }
         }
@@ -380,7 +380,7 @@ public class SemaphoreSimulator : MonoBehaviour
             }
         }
 
-        if(other.transform.CompareTag("Bicycle"))
+        if (other.transform.CompareTag("Bicycle"))
         {
             if (other.transform.GetComponentInParent<BcycleGyroController>())
             {

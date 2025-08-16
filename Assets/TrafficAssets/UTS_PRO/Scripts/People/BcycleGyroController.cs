@@ -91,9 +91,9 @@ public class BcycleGyroController : MonoBehaviour
             curMoveSpeed = Mathf.Lerp(curMoveSpeed, moveSpeed, Time.deltaTime * increaseSpeed);
         }
 
-        if (rigBody.velocity.magnitude > curMoveSpeed)
+        if (rigBody.linearVelocity.magnitude > curMoveSpeed)
         {
-            rigBody.velocity = rigBody.velocity.normalized * curMoveSpeed;
+            rigBody.linearVelocity = rigBody.linearVelocity.normalized * curMoveSpeed;
         }
     }
 
@@ -155,8 +155,8 @@ public class BcycleGyroController : MonoBehaviour
             {
                 Vector3 velocity = movePath.finishPos - rigBody.transform.position;
 
-                velocity.y = rigBody.velocity.y;
-                rigBody.velocity = new Vector3(velocity.normalized.x * curMoveSpeed, velocity.y, velocity.normalized.z * curMoveSpeed);
+                velocity.y = rigBody.linearVelocity.y;
+                rigBody.linearVelocity = new Vector3(velocity.normalized.x * curMoveSpeed, velocity.y, velocity.normalized.z * curMoveSpeed);
             }
         }
         else if (richPointDistance <= movePath._walkPointThreshold && movePath.forward)
