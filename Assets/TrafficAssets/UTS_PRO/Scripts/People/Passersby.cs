@@ -576,33 +576,26 @@ public class Passersby : MonoBehaviour
 
     private void ActionNearSemaphore()
     {
-        //если светофора нет - выходим
-        //почему он может быть равен нал???
-        //где вызывается бег???
         if (nearSemaphore == null) return;
 
-        //дистанция до светофора
         float distance = Vector3.Distance(transform.position, nearSemaphore.transform.position);
 
-        if(distance < 25.0f)
+        if (distance < 25.0f)
         {
-            //если зелёный
-            if(nearSemaphore.PEOPLE_CAN)
+            if (nearSemaphore.CAR_CAN) // 原本是 PEOPLE_CAN
             {
-                //продолжаем анимацию
                 animationState = lastState;
             }
             else
             {
-                //если красный
                 if (!insideSemaphore)
                 {
-                    //если не на дороге
                     animationState = AnimationState.idle1;
                 }
             }
         }
     }
+
 
     private void ActionNearCar()
     {

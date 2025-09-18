@@ -392,7 +392,23 @@ public class CarAIController : MonoBehaviour
             }
             else if (hit.transform.CompareTag("PeopleSemaphore"))
             {
-                ReasonsStoppingCars.SemaphoreInView(hit.transform.GetComponent<SemaphorePeople>(), distance, startSpeed, insideSemaphore, ref moveSpeed, ref tempStop, distanceToSemaphore);
+                //ReasonsStoppingCars.SemaphoreInView(hit.transform.GetComponent<SemaphorePeople>(), distance, startSpeed, insideSemaphore, ref moveSpeed, ref tempStop, distanceToSemaphore);
+
+                SemaphoreSimulator semaphore = hit.transform.GetComponent<SemaphoreSimulator>();
+
+                if (semaphore != null)
+                {
+                    if (semaphore.IsRed) // 紅燈
+                    {
+                        ReasonsStoppingCars.SemaphoreInView(hit.transform.GetComponent<SemaphorePeople>(), distance, startSpeed, insideSemaphore, ref moveSpeed, ref tempStop, distanceToSemaphore);
+
+                    }
+                    else // 綠燈，自動走
+                    {
+                        tempStop = false;       // 停車狀態關掉
+                        moveSpeed = startSpeed; // 恢復原始速度
+                    }
+                }
             }
             else if (hit.transform.CompareTag("Player") || hit.transform.CompareTag("People"))
             {
@@ -418,15 +434,4 @@ public class CarAIController : MonoBehaviour
         }
     }
 
-    /*private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-
-        if (bc != null)
-        {
-            Gizmos.DrawRay(new Vector3(transform.position.x + transform.forward.x * bc.size.z / 2, transform.position.y + 0.5f, transform.position.z + transform.forward.z * bc.size.z / 2), transform.forward * 20);
-            Gizmos.DrawRay(new Vector3(transform.position.x + transform.forward.x * bc.size.z / 2, transform.position.y + 0.5f, transform.position.z + transform.forward.z * bc.size.z / 2) + transform.right, transform.forward * 20);
-            Gizmos.DrawRay(new Vector3(transform.position.x + transform.forward.x * bc.size.z / 2, transform.position.y + 0.5f, transform.position.z + transform.forward.z * bc.size.z / 2) - transform.right, transform.forward * 20);
-        }
-    }*/
 }

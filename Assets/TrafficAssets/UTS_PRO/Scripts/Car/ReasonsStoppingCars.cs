@@ -39,40 +39,21 @@ public class ReasonsStoppingCars : MonoBehaviour
 
     public static void SemaphoreInView(SemaphorePeople semaphore, float distance, float startSpeed, bool insideSemaphore, ref float moveSpeed, ref bool tempStop, float distanceToSem = 10)
     {
+        if (semaphore == null) return;
+
         if (distance >= distanceToSem)
         {
             if (semaphore.CAR_CAN)
             {
-                if (semaphore.HOW_MANY > 0)
-                {
-                    moveSpeed = startSpeed * 0.5f;
-                }
-                else
-                {
-                    if (semaphore.FLICKER)
-                    {
-                        if (!insideSemaphore)
-                        {
-                            moveSpeed = startSpeed * 0.5f;
-                        }
-                        else
-                        {
-                            moveSpeed = startSpeed;
-                            tempStop = false;
-                        }
-                    }
-                    else
-                    {
-                        moveSpeed = startSpeed;
-                        tempStop = false;
-                    }
-                }
+                moveSpeed = startSpeed;
+                tempStop = false;
             }
             else
             {
                 if (!insideSemaphore)
                 {
                     moveSpeed = startSpeed * 0.5f;
+                    tempStop = true;
                 }
                 else
                 {
@@ -85,15 +66,8 @@ public class ReasonsStoppingCars : MonoBehaviour
         {
             if (semaphore.CAR_CAN)
             {
-                if (semaphore.HOW_MANY > 0)
-                {
-                    tempStop = true;
-                }
-                else
-                {
-                    moveSpeed = startSpeed;
-                    tempStop = false;
-                }
+                moveSpeed = startSpeed;
+                tempStop = false;
             }
             else
             {
@@ -103,19 +77,13 @@ public class ReasonsStoppingCars : MonoBehaviour
                 }
                 else
                 {
-                    if (semaphore.HOW_MANY > 0)
-                    {
-                        tempStop = true;
-                    }
-                    else
-                    {
-                        tempStop = false;
-                        moveSpeed = startSpeed;
-                    }
+                    moveSpeed = startSpeed;
+                    tempStop = false;
                 }
             }
         }
     }
+
 
     public static void PlayerInView(Transform player, float distance, float startSpeed, ref float moveSpeed, ref bool tempStop)
     {
